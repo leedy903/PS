@@ -1,0 +1,1 @@
+main(void){int N=0,M=0,i=0;scanf("%d",&N);M=N;for(i=0;i==0||N!=M;i++)M=M%10*10+(M/10+M%10)%10;printf("%d",i);}
