@@ -3,8 +3,5 @@ def solution(n):
     if n < 3:
         return n
     for i in range(3, n + 1):
-        next = (a + b) % 1_000_000_007
-        a = b
-        b = next
-    answer = b
-    return answer
+        a, b = b, (a + b) % 1_000_000_007
+    return b
