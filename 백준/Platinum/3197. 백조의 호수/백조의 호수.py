@@ -67,16 +67,6 @@ for day in range(1, R * C + 1):
     next_boarder_line = list(next_boarder_line)
 
     for y, x in next_boarder_line:
-        for i in range(4):
-            ny = y + dy[i]
-            nx = x + dx[i]
-            if 0 <= ny < R and 0 <= nx < C:
-                if matrix[ny][nx] in ('.', 'L'):
-                    cur_id = find_parent(y * C + x)
-                    next_id = find_parent(ny * C + nx)
-                    unoin(cur_id, next_id)
-
-    for y, x in next_boarder_line:
         matrix[y][x] = '.'
 
     for y, x in next_boarder_line:
