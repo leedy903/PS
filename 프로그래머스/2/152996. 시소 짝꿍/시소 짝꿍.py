@@ -1,8 +1,8 @@
 from collections import Counter
 
 def solution(weights):
-    counter = Counter(weights)
     answer = 0
+    counter = Counter(weights)
     
     for weight, count in counter.items():
         answer += count * (count - 1) // 2
