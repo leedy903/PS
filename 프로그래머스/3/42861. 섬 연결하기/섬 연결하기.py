@@ -1,47 +1,32 @@
-from heapq import heappush, heappop
-
-parents = []
 def solution(n, costs):
-    global parents
     answer = 0
-    parents = [i for i in range(n)]
+    parent = list(range(n))
+    def find(x):
+        if x != parent[x]:
+            parent[x] = find(parent[x])
+        return parent[x]
     
-    pq = []
-    for cost in costs:
-        u, v, w = cost
-        heappush(pq, [w, u, v])
+    def union(a, b):
+        a = find(a)
+        b = find(b)
+        if a < b:
+            parent[b] = a
+        else:
+            parent[a] = b
     
-    edgeCount = 0
+    costs.sort(key=lambda x : x[2])
     
-    while pq:
-        w, u, v = heappop(pq)
+    cnt = 0
+    for a, b, cost in costs:
+        a = find(a)
+        b = find(b)
         
-        u = find(u)
-        v = find(v)
-        if u != v:
-            answer += w
-            edgeCount += 1
-            union(u, v)
-    
-        if edgeCount == n - 1:
+        if a != b:
+            union(a, b)
+            answer += cost
+            cnt += 1
+            
+        if n - 1 <= cnt:
             break
-    
+        
     return answer
-
-
-def find(x):
-    global parents
-    if x != parents[x]:
-        parents[x] = find(parents[x])
-    return parents[x]
-
-
-def union(a, b):
-    global parents
-    a = find(a)
-    b = find(b)
-    
-    if a < b:
-        parents[b] = a
-    else:
-        parents[a] = b
